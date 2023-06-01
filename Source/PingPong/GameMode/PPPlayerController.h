@@ -16,4 +16,8 @@ class PINGPONG_API APPPlayerController : public APlayerController
 	
 	virtual void SetupInputComponent() override;
 	virtual void BeginPlay() override;
+	
+	FVector Velocity;
+	UFUNCTION()
+	void XMovement(float AxisValue);
 };
