@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
-#include "PlayerPawn.h"
 #include "PPGameMode.generated.h"
 
 class APlayerPawn;
@@ -22,10 +21,14 @@ class PINGPONG_API APPGameMode : public AGameModeBase
 	virtual void PostLogin(APlayerController* NewPlayer) override;
 
 public:
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY()
 	APlayerPawn* Player1;
+	UPROPERTY()
+	ACameraActor* Camera1;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY()
 	APlayerPawn* Player2;
+	UPROPERTY()
+	ACameraActor* Camera2;
 };
 
