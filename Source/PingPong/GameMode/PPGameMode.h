@@ -6,6 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "PPGameMode.generated.h"
 
+class UScoreWidget;
 class AContainerActor;
 /**
  * 
@@ -14,14 +15,6 @@ UCLASS()
 class PINGPONG_API APPGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
-
-	APPGameMode();
 	
-	virtual void InitGameState() override;
-	virtual void PostLogin(APlayerController* NewPlayer) override;
-
-public:
-	UPROPERTY()
-	AContainerActor* Container;
 };
 

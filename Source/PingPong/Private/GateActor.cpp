@@ -3,25 +3,30 @@
 
 #include "GateActor.h"
 
+#include "PingPong/GameMode/PPGameState.h"
+
 // Sets default values
 AGateActor::AGateActor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
+	
+	RootComponent = StaticMeshComponent;
 }
 
 // Called when the game starts or when spawned
 void AGateActor::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	StaticMeshComponent->OnComponentHit.AddDynamic(this, &AGateActor::OnComponentHit);
 }
 
-// Called every frame
-void AGateActor::Tick(float DeltaTime)
+void AGateActor::OnComponentHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+	FVector NormalImpulse, const FHitResult& Hit)
 {
-	Super::Tick(DeltaTime);
-
+	GetWorld()->GetGameState<APPGameState>()->OnGoalHappened.Broadcast(GateType);
 }
 

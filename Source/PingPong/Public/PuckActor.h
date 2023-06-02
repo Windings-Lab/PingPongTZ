@@ -4,34 +4,32 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "GateActor.generated.h"
+#include "PuckActor.generated.h"
 
-UENUM()
-enum EGate : int
-{
-	Player1 = 1,
-	Player2 = 2
-};
+enum EGate : int;
 
 UCLASS()
-class PINGPONG_API AGateActor : public AActor
+class PINGPONG_API APuckActor : public AActor
 {
 	GENERATED_BODY()
 
-public:
-	// Sets default values for this actor's properties
-	AGateActor();
-
-	UPROPERTY(EditInstanceOnly)
-	TEnumAsByte<EGate> GateType;
+	const float Speed = 3000.f;
 	
+public:	
+	// Sets default values for this actor's properties
+	APuckActor();
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	UStaticMeshComponent* StaticMeshComponent;
-	
+
+	UFUNCTION()
+	void Respawn(EGate GateType);
+
+	virtual void Tick(float DeltaSeconds) override;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	
 
-	UFUNCTION()
-	void OnComponentHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 };

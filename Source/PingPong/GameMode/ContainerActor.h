@@ -19,14 +19,7 @@ public:
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadWrite)
 	APlayerPawn* Player1;
-	UPROPERTY(EditInstanceOnly, BlueprintReadWrite)
-	ACameraActor* Camera1;
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadWrite)
 	APlayerPawn* Player2;
-	UPROPERTY(EditInstanceOnly, BlueprintReadWrite)
-	ACameraActor* Camera2;
-
-	UPROPERTY(EditInstanceOnly, BlueprintReadWrite)
-	FVector PuckSpawnLocation;
 };

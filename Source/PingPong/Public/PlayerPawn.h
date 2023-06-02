@@ -14,4 +14,7 @@ class PINGPONG_API APlayerPawn : public APawn
 public:
 	// Sets default values for this pawn's properties
 	APlayerPawn();
+	
+	UPROPERTY(EditInstanceOnly, Category="Camera")
+	ACameraActor* PlayerCamera;
 };
