@@ -22,13 +22,18 @@ void APuckActor::Respawn(EGate)
 	SetActorLocation(FVector(0.f, 0.f, 80.f));
 }
 
-void APuckActor::Tick(float DeltaSeconds)
+void APuckActor::OnPuckHit_Server_Implementation(UPrimitiveComponent* HitComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	Super::Tick(DeltaSeconds);
-
 	FVector Vel = StaticMeshComponent->GetPhysicsLinearVelocity();
 	Vel = UKismetMathLibrary::Normal(Vel) * Speed;
 	StaticMeshComponent->SetPhysicsLinearVelocity(Vel);
+}
+
+void APuckActor::OnGameStart()
+{
+	Respawn(Player1);
+	StaticMeshComponent->AddImpulse(FVector(0.f, Speed, 0.f), NAME_None, true);
 }
 
 // Called when the game starts or when spawned
@@ -36,8 +41,10 @@ void APuckActor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Respawn(Player1);
-	GetWorld()->GetGameState<APPGameState>()->OnGoalHappened.AddUniqueDynamic(this, &APuckActor::Respawn);
-	StaticMeshComponent->AddImpulse(FVector(0.f, Speed, 0.f), NAME_None, true);
+	auto* PPGameState = GetWorld()->GetGameState<APPGameState>();
+	
+	StaticMeshComponent->OnComponentHit.AddDynamic(this, &APuckActor::OnPuckHit_Server);
+	PPGameState->OnGoalHappened.AddUniqueDynamic(this, &APuckActor::Respawn);
+	PPGameState->OnGameStart.AddUniqueDynamic(this, &APuckActor::OnGameStart);
 }
 

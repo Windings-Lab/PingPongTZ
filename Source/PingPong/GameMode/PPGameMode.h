@@ -15,6 +15,16 @@ UCLASS()
 class PINGPONG_API APPGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
+
+	FTimerHandle WaitBeforeStart;
+	FTimerHandle OutputRemainingTime;
 	
+	virtual void OnPostLogin(AController* NewPlayer) override;
+
+	UFUNCTION()
+	void WaitBeforeStartFunction();
+
+	UFUNCTION()
+	void OutputRemainingTimeFunction();
 };
 

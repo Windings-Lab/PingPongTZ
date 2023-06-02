@@ -25,7 +25,11 @@ public:
 	UFUNCTION()
 	void Respawn(EGate GateType);
 
-	virtual void Tick(float DeltaSeconds) override;
+	UFUNCTION(Server, Reliable)
+	void OnPuckHit_Server(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+
+	UFUNCTION()
+	void OnGameStart();
 
 protected:
 	// Called when the game starts or when spawned
