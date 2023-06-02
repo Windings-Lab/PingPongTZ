@@ -17,7 +17,7 @@ APuckActor::APuckActor()
 	RootComponent = StaticMeshComponent;
 }
 
-void APuckActor::Respawn(EGate GateType)
+void APuckActor::Respawn(EGate)
 {
 	SetActorLocation(FVector(0.f, 0.f, 80.f));
 }
@@ -35,6 +35,8 @@ void APuckActor::Tick(float DeltaSeconds)
 void APuckActor::BeginPlay()
 {
 	Super::BeginPlay();
+
+	Respawn(Player1);
 	GetWorld()->GetGameState<APPGameState>()->OnGoalHappened.AddUniqueDynamic(this, &APuckActor::Respawn);
 	StaticMeshComponent->AddImpulse(FVector(0.f, Speed, 0.f), NAME_None, true);
 }
