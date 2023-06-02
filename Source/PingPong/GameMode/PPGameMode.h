@@ -6,7 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "PPGameMode.generated.h"
 
-class APlayerPawn;
+class AContainerActor;
 /**
  * 
  */
@@ -22,13 +22,6 @@ class PINGPONG_API APPGameMode : public AGameModeBase
 
 public:
 	UPROPERTY()
-	APlayerPawn* Player1;
-	UPROPERTY()
-	ACameraActor* Camera1;
-
-	UPROPERTY()
-	APlayerPawn* Player2;
-	UPROPERTY()
-	ACameraActor* Camera2;
+	AContainerActor* Container;
 };
 

@@ -2,6 +2,7 @@
 
 #include "PingPong/GameMode/PPGameMode.h"
 
+#include "ContainerActor.h"
 #include "PlayerPawn.h"
 #include "PPPlayerController.h"
 #include "Camera/CameraActor.h"
@@ -17,49 +18,7 @@ void APPGameMode::InitGameState()
 {
 	Super::InitGameState();
 
-	TArray<AActor*> Player1Actors;
-	TArray<AActor*> Player2Actors;
-
-	UGameplayStatics::GetAllActorsWithTag(GetWorld(), TEXT("PlayerTag1"), Player1Actors);
-	UGameplayStatics::GetAllActorsWithTag(GetWorld(), TEXT("PlayerTag2"), Player2Actors);
-
-	// Player 1
-	if(auto* PlayerPawn = Cast<APlayerPawn>(Player1Actors[0]))
-	{
-		Player1 = PlayerPawn;
-	}
-	else
-	{
-		Camera1 = Cast<ACameraActor>(Player1Actors[0]);
-	}
-
-	if(auto* PlayerPawn = Cast<APlayerPawn>(Player1Actors[1]))
-	{
-		Player1 = PlayerPawn;
-	}
-	else
-	{
-		Camera1 = Cast<ACameraActor>(Player1Actors[1]);
-	}
-
-	// Player 2
-	if(auto* PlayerPawn = Cast<APlayerPawn>(Player2Actors[0]))
-	{
-		Player2 = PlayerPawn;
-	}
-	else
-	{
-		Camera2 = Cast<ACameraActor>(Player2Actors[0]);
-	}
-
-	if(auto* PlayerPawn = Cast<APlayerPawn>(Player2Actors[1]))
-	{
-		Player2 = PlayerPawn;
-	}
-	else
-	{
-		Camera2 = Cast<ACameraActor>(Player2Actors[1]);
-	}
+	Container = Cast<AContainerActor>(UGameplayStatics::GetActorOfClass(GetWorld(), AContainerActor::StaticClass()));
 }
 
 void APPGameMode::PostLogin(APlayerController* NewPlayer)
@@ -70,8 +29,8 @@ void APPGameMode::PostLogin(APlayerController* NewPlayer)
 	}
 	else
 	{
-		NewPlayer->SetPawn(GetNumPlayers() == 1 ? Player1 : Player2);
+		NewPlayer->SetPawn(GetNumPlayers() == 1 ? Container->Player1 : Container->Player2);
 	}
 	Super::PostLogin(NewPlayer);
-	NewPlayer->SetViewTarget(GetNumPlayers() == 1 ? Camera1 : Camera2);
+	NewPlayer->SetViewTarget(GetNumPlayers() == 1 ? Container->Camera1 : Container->Camera2);
 }
