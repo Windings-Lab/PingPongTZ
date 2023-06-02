@@ -22,9 +22,16 @@ class PINGPONG_API APPPlayerController : public APlayerController
 	virtual void SetupInputComponent() override;
 	virtual void BeginPlay() override;
 	
-	FVector Velocity;
-	UFUNCTION()
-	void XMovement(float AxisValue);
+	void XMovement_Client(float AxisValue);
+
+	UFUNCTION(Server, Reliable)
+	void XMovement_Server(FVector NewLocation);
+
+	UFUNCTION(Server, Reliable)
+	void PossessPawn_Server();
+
+	UFUNCTION(Client, Reliable)
+	void PossessPawn_Client();
 
 public:
 	UPROPERTY()
