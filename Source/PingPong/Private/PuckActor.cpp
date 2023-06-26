@@ -4,7 +4,7 @@
 #include "PingPong/Public/PuckActor.h"
 
 #include "Kismet/KismetMathLibrary.h"
-#include "PingPong/GameMode/PPGameState.h"
+#include "PingPong/Public/GameMode/PPGameState.h"
 
 // Sets default values
 APuckActor::APuckActor()
@@ -17,7 +17,7 @@ APuckActor::APuckActor()
 	RootComponent = StaticMeshComponent;
 }
 
-void APuckActor::Respawn(EGate)
+void APuckActor::Respawn()
 {
 	SetActorLocation(FVector(0.f, 0.f, 80.f));
 }
@@ -32,7 +32,7 @@ void APuckActor::OnPuckHit_Server_Implementation(UPrimitiveComponent* HitCompone
 
 void APuckActor::OnGameStart()
 {
-	Respawn(Player1);
+	Respawn();
 	StaticMeshComponent->AddImpulse(FVector(0.f, Speed, 0.f), NAME_None, true);
 }
 
@@ -44,7 +44,6 @@ void APuckActor::BeginPlay()
 	auto* PPGameState = GetWorld()->GetGameState<APPGameState>();
 	
 	StaticMeshComponent->OnComponentHit.AddDynamic(this, &APuckActor::OnPuckHit_Server);
-	PPGameState->OnGoalHappened.AddUniqueDynamic(this, &APuckActor::Respawn);
 	PPGameState->OnGameStart.AddUniqueDynamic(this, &APuckActor::OnGameStart);
 }
 

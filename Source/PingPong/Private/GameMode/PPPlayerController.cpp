@@ -1,13 +1,16 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "PingPong/GameMode/PPPlayerController.h"
+#include "PingPong/Public/GameMode/PPPlayerController.h"
 
-#include "ContainerActor.h"
+#include "PingPong/Public/GameMode/ContainerActor.h"
 #include "PlayerPawn.h"
+#include "Blueprint/UserWidget.h"
 #include "Camera/CameraActor.h"
+#include "Components/SlateWrapperTypes.h"
 #include "GameFramework/GameStateBase.h"
 #include "Kismet/GameplayStatics.h"
+#include "Widget/ScoreWidget.h"
 
 APPPlayerController::APPPlayerController()
 {

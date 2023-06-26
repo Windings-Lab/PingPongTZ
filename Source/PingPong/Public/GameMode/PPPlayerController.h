@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
-#include "PingPong/Widgets/ScoreWidget.h"
+#include "PingPong/Public/Widget/ScoreWidget.h"
 #include "PPPlayerController.generated.h"
 
 class AContainerActor;
