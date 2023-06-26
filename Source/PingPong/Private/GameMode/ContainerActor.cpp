@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "PingPong/Public/GameMode/ContainerActor.h"
+#include "GameMode/ContainerActor.h"
 
 // Sets default values
 AContainerActor::AContainerActor()

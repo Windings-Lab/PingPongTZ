@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "PingPong/Public/Widget/ScoreWidget.h"
+#include "Widget/ScoreWidget.h"
 
 #include "Components/TextBlock.h"
-#include "PingPong/Public/GameMode/PPGameState.h"
+#include "GameMode/PPGameState.h"
 
 void UScoreWidget::NativeConstruct()
 {

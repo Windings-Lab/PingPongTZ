@@ -3,7 +3,7 @@
 
 #include "GateActor.h"
 
-#include "PingPong/Public/GameMode/PPGameState.h"
+#include "GameMode/PPGameState.h"
 
 // Sets default values
 AGateActor::AGateActor()

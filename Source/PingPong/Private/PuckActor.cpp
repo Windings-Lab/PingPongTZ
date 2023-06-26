@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "PingPong/Public/PuckActor.h"
+#include "PuckActor.h"
 
 #include "Kismet/KismetMathLibrary.h"
-#include "PingPong/Public/GameMode/PPGameState.h"
+#include "GameMode/PPGameState.h"
 
 // Sets default values
 APuckActor::APuckActor()
